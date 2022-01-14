@@ -1,11 +1,25 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Login from "./pages/login";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+  } from "react-router-dom";
+  import {createContext} from 'react';
+  export const AuthContext = createContext();
 
-export function App(){
+const App=()=>{
     return(
-        <div>
-            <h1>
-                Welcome { new Date().toDateString()}
-            </h1>
-        </div>
-    )
+      <Router>
+        <Routes>
+        
+          <Route exact path="/" element={<Login/>} />
+            
+
+        </Routes>
+      </Router>
+    );
 }
+
+export default App;
