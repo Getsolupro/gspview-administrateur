@@ -1,0 +1,19 @@
+{
+  "name": "gspview-administrateur",
+  "version": "1.0.0",
+  "description": "L'application d'administration de gspview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Getsolupro/gspview-administrateur.git"
+  },
+  "author": "getsolupro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Getsolupro/gspview-administrateur/issues"
+  },
+  "homepage": "https://github.com/Getsolupro/gspview-administrateur#readme"
+}
