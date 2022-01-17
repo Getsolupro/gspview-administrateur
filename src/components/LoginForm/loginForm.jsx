@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -8,8 +8,17 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import validator from "validator";
-
+import { useDispatch, useSelector } from "react-redux";
 import { AuthContext } from "../../context";
+import { green } from "@material-ui/core/colors";
+import axios from "axios";
+import { signIn } from "../../redux/actions";
+import {
+  Navigate,
+  Route
+} from 'react-router-dom';
+import { useNavigate } from "react-router";
+import Login from "../../pages/login";
 
 const useStyles = makeStyles({
   formContainer: {
@@ -44,27 +53,67 @@ const useStyles = makeStyles({
       backgroundColor: "#94142c",
     },
   },
-  error: {
-    width: "100%",
-    backgroundColor: "#94142c",
-    height: "3em",
-    borderRadius: "10px",
-  },
   errorText: {
     color: "#fff",
     textAlign: "center",
-    paddingTop: "0.8em",
+    padding: "0em",
+    padding: "0.4em",
+    backgroundColor: "#94142c",
+    borderRadius: "10px",
+    height: "3em",
   },
 });
 
 const LoginForm = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPass] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   //const { signIn } = useContext(AuthContext);
-  //const history = useHistory();
+  const dispatch=useDispatch();
+  let navigate = useNavigate();
+
+  const onEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const onPassChange = (e) => {
+    setPass(e.target.value);
+  };
+
+  const { isAuthenticated, setIsAuthenticated}=useContext(AuthContext);
+  let user=useSelector(state=>state.data);
+  console.log(user)
+  if(user.status==401){
+    //setError(user.erreur);
+    console.log("erreur de donnee");
+    navigate("/");
+   
+  }
+  else if(user.loggedIn){
+     
+     // navigate("/");
+  }
+
+  
+  const seConnecter =() => {
+
+    if (!validator.isEmail(email)) {
+      setError("L'e-mail que vous avez entré est incorrect! ");
+      return console.log(error);
+    }
+
+        let credentials={
+          email:email,
+          password:password
+        }
+        dispatch(signIn(credentials));
+      
+        navigate("/");
+      
+        
+  };
 
   return (
     <div className={classes.formContainer}>
@@ -73,9 +122,9 @@ const LoginForm = () => {
       <form noValidate autoComplete="off">
         
         {error ? (
-            <div className={classes.error}>
-            <p className={classes.errorText}>{error}</p>
-            </div>
+            
+               <p className={classes.errorText}>{error}</p>
+           
         ) : null}
         <TextField
           id="outlined-error-helper-text"

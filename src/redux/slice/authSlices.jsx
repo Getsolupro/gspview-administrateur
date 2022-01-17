@@ -4,32 +4,30 @@ export const authenticationSlice = createSlice({
   name: "authentication",
   initialState: {
     isLoading: true,
-    userId: null,
     userToken: null,
-    group: null,
+    user: null,
   },
   reducers: {
     login: (state, action) => {
       Object.assign(state, {
         isLoading: false,
-        userId: action.payload.id,
-        userToken: action.payload.token,
-        group: action.payload.group,
+        accessToken: action.payload.accessToken,
+        user: action.payload.user,
       });
+      //console.log(user);
     },
     retrieveToken: (state, action) => {
       Object.assign(state, {
         isLoading: false,
-        userToken: action.payload.token,
-        group: action.payload.group,
+        accessToken: action.payload.accessToken,
+        user: action.payload.user,
       });
     },
     logout: (state, action) => {
       Object.assign(state, {
         isLoading: false,
-        userId: action.payload.id,
-        userToken: action.payload.token,
-        group: action.payload.group,
+        accessToken: action.payload.accessToken,
+        user: action.payload.user,
       });
     },
   },
