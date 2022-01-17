@@ -21,15 +21,14 @@ const usersReducer=(state=initialState, action)=>{
                 }
             );
             //// verification de donnee
-            if(action.payload.payload.status===401){
+            if(action.payload.status===401){
+                console.log("action.payload.status")
                 return {
                     ...state,
-                    errors:action.payload.payload,
-                    status:401,
-                    loggedIn:false
+                    errors:action.payload.erreur
                 };
             }
-           const user=jwtDecode(action.payload.payload.accessToken);
+           const user=jwtDecode(action.payload.accessToken);
             return {
                 ...state,
                 users:action.payload,

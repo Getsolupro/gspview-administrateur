@@ -84,19 +84,13 @@ const LoginForm = () => {
 
   const { isAuthenticated, setIsAuthenticated}=useContext(AuthContext);
   let user=useSelector(state=>state.data);
-  console.log(user)
   if(user.status==401){
-    //setError(user.erreur);
-    console.log("erreur de donnee");
-    navigate("/");
-   
+    setError("L'e-mail que vous avez entré est incorrect! ");
   }
   else if(user.loggedIn){
-     
-     // navigate("/");
+     navigate("/");
   }
 
-  
   const seConnecter =() => {
 
     if (!validator.isEmail(email)) {

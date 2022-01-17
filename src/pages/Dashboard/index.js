@@ -23,6 +23,8 @@ const DashBoard = () => {
   return (
     <div className={classes.root}>
       DashBoard
+
+      <input type="text" />
     </div>
   );
 };

@@ -13,11 +13,13 @@ import {
 
 function App(){
    const loginState = useSelector((state) => state.data.loggedIn);
+   console.log(loginState);
     return(
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<DashBoard />} />
-        <Route path="/" element={ loginState ? <Navigate replace to="/dashboard" />:<Navigate replace to="/login" />} />
+        <Route exact path="/" element={ loginState ? <Navigate to="/dashboard" />:<Navigate to="/login" />} />
+        
       </Routes>
    
     );
