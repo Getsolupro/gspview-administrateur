@@ -7,6 +7,11 @@ const login=(user)=>({
     payload:user
 });
 
+const getStaff=(user)=>({
+    type:Types.GET_STAFF,
+    payload:user
+})
+
 export const signIn=(user)=>{
     return function (dispatch){
         axios.post(`${url}login`, user)
@@ -20,6 +25,15 @@ export const signIn=(user)=>{
                  }
                  
              }).catch(error=>console.log(error))
+    }
+}
+
+export const loadStaff=(id)=>{
+    return function (dispatch){
+        axios.get(`${url}${id}`)
+             .then((response)=>{
+                 dispatch(getStaff(response.data))
+             })
     }
 }
 

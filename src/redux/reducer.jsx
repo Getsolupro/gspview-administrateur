@@ -9,7 +9,8 @@ const initialState={
     profile:null,
     email:null,
     loggedIn:false,
-    errors:null
+    errors:null,
+    id:null
 };
 
 const usersReducer=(state=initialState, action)=>{
@@ -29,13 +30,17 @@ const usersReducer=(state=initialState, action)=>{
                 };
             }
            const user=jwtDecode(action.payload.accessToken);
+           console.log("action.payload.accessToken");
+            console.log(user);
+           console.log("action.payload.accessToken");
             return {
                 ...state,
                 users:action.payload,
                 profile:user.profile,
                 email:user.email,
                 status:200,
-                loggedIn:true
+                loggedIn:true,
+                id:user.id
             };
         
         default:

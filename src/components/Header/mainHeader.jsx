@@ -12,9 +12,9 @@ import {
 } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-import { AuthContext } from "../../context";
+//import { AuthContext } from "../../context";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -96,10 +96,8 @@ const MainHeader = ({ routeName }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { signOut } = useContext(AuthContext);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const history = useHistory();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -118,11 +116,6 @@ const MainHeader = ({ routeName }) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleLogout = async () => {
-    await signOut();
-    history.push("/login");
-  };
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -139,10 +132,10 @@ const MainHeader = ({ routeName }) => {
           Mon profil
         </Link>
       </MenuItem>
-      <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
+      <MenuItem >Se déconnecter</MenuItem>
     </Menu>
   );
-
+  
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -168,6 +161,7 @@ const MainHeader = ({ routeName }) => {
     </Menu>
   );
 
+
   return (
     <div className={classes.grow}>
       <AppBar position="static" className={classes.bar}>
@@ -178,27 +172,28 @@ const MainHeader = ({ routeName }) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
             >
-              <AccountCircle />
+            <AccountCircle />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
             >
-              <MoreIcon />
+            <MoreIcon />
             </IconButton>
           </div>
+        
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

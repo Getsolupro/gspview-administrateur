@@ -84,6 +84,9 @@ const LoginForm = () => {
 
   const { isAuthenticated, setIsAuthenticated}=useContext(AuthContext);
   let user=useSelector(state=>state.data);
+  console.log("Debut user");
+  console.log(user);
+  console.log("Fin user");
   if(user.status==401){
     setError("L'e-mail que vous avez entré est incorrect! ");
   }
